@@ -39,7 +39,7 @@ skills = {
     'w': {'icon': 'Sonic_Vibration.png', 'cooldown': 14, 'buff': 6},
     'e': {'icon': 'Prelude_of_Storm.png', 'cooldown': 8, 'buff': None},
     'r': {'icon': 'Soundholic.png', 'cooldown': 14, 'buff': None},
-    'a': {'icon': 'Heavenly_Tune.png', 'cooldown': 14, 'buff': 7},
+    'a': {'icon': 'Heavenly_Tune.png', 'cooldown': 14, 'buff': 8},
     's': {'icon': 'Guardian_Tune.png', 'cooldown': 9, 'buff': 8},
     'd': {'icon': 'Rhapsody_of_Light.png', 'cooldown': 11, 'buff': None},
     'f': {'icon': 'Wind_of_Music.png', 'cooldown': 8, 'buff': None}
