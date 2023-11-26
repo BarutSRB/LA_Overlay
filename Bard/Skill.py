@@ -55,26 +55,3 @@ class Skill():
 
 
 
-
-Sound_Shock              =  Skill("Sound_Shock", 6, 4 )
-Prelude_of_Storm         =  Skill("Prelude_of_Storm", 16-3, None )
-Wind_of_Music            =  Skill("Wind_of_Music", 18-4, 4 )
-Sonic_Vibration          =  Skill("Sonic_Vibration", 24, 6 )
-Rhapsody_of_Light        =  Skill("Rhapsody_of_Light", 24-5, None )
-Soundholic               =  Skill("Soundholic", 24, None )
-Heavenly_Tune            =  Skill("Heavenly_Tune", 30-6, 8 )
-Guardian_Tune_Wind       =  Skill("Guardian_Tune", 30, 8+8 )
-Guardian_Tune_Agile      =  Skill("Guardian_Tune", 15, 4+4 )
-Sonatina                 =  Skill("Sonatina", 21-7, 5)
-Stigma_Brilliant         =  Skill("Stigma", 16, 4+2+3)
-Stigma_Storm             =  Skill("Stigma", 16, None)
-Harp_of_Rhythm           =  Skill("Harp_of_Rhythm", 24, None) # Not sure how long the harp lasts
-Rhythm_Buckshot          =  Skill("Rhythm_Buckshot", 16, None)
-Dissonance_Living        =  Skill("Dissonance", 8+2, 5+2)
-Dissonance_No_Living     =  Skill("Dissonance", 8, 5+2)
-
-
-
-
-
-
