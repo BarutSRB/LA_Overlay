@@ -31,8 +31,8 @@ The hope is that Smile Gate developers will stop being lazy and eventually eithe
 
 1. Install Python.
 2. In the Command Prompt, type `pip install pygame pywin32 keyboard`.
-3. Edit the `overlay.py` in your sub class directory in a code editor like Sublime Text or Notepad++ for the skill cooldown values based on your gems and swiftness stat. Also, edit the positioning and size of the overlay based on your resolution under GUI Constants (Default settings are for 3440x1440p).
-4. Run the program by typing `py main.py` in the Command Prompt.
+3. Open the `SETTINGS.py` in your sub class directory in a code editor like Sublime Text or Notepad++ and add your gems and swiftness stat. Also, edit the positioning of the overlay based on your resolution( `WINDOW_POS_X` and `WINDOW_POS_Y`, Default settings are for 3440x1440p).
+4. Run the program by typing `py main.py` in the Command Prompt in the main directory.
 
 ## Guide to Editing
 Soon...
