@@ -1,5 +1,9 @@
 # LA_Overlay - Lost Ark Overlay
 
+<p align="center">
+  <img src="https://i.imgur.com/J1KqXGR.gif" alt="Your Image Description">
+</p>
+
 ## Description
 **LA_Overlay** is a standalone overlay designed specifically for *Lost Ark*. It operates independently of the game, ensuring no interaction with the game's memory or packet analysis, making it completely safe.
 
@@ -27,9 +31,11 @@ The hope is that Smile Gate developers will stop being lazy and eventually eithe
 
 1. Install Python.
 2. In the Command Prompt, type `pip install pygame pywin32 keyboard`.
-3. Open the `SETTINGS.py` in a code editor like Sublime Text or Notepad++ and add your gems and swiftness stat. Also, edit the positioning of the overlay based on your resolution( `WINDOW_POS_X` and `WINDOW_POS_Y`, Default settings are for 3440x1440p).
-4. Run the program by typing `py main.py` in the Command Prompt.
+3. Open the `SETTINGS.py` in your sub class directory in a code editor like Sublime Text or Notepad++ and add your gems and swiftness stat. Also, edit the positioning of the overlay based on your resolution( `WINDOW_POS_X` and `WINDOW_POS_Y`, Default settings are for 3440x1440p).
+4. Run the program by typing `py main.py` in the Command Prompt in the main directory.
 
+## Guide to Editing
+Soon...
 
 ```diff
 + Please consider sharing any useful modifications you make to this and any assistance is welcome.
