@@ -69,8 +69,14 @@ def draw_cooldown_overlay(skill, x, y):
     screen.blit(overlay, (x, y))
 
 def draw_cooldown_text(cooldown, x, y, font, skill):
-    rounded = int(cooldown) if cooldown >= 10 else round(cooldown,1)
-    text = font.render(str(rounded), True, (255, 255, 255)) #Countdown font color currently white
+    if cooldown < 1:
+        # Display with one decimal place if cooldown is less than 1 second
+        rounded = round(cooldown, 1)
+    else:
+        # Display as an integer if cooldown is 1 second or more
+        rounded = int(cooldown)
+
+    text = font.render(str(rounded), True, (255, 255, 255))  # Countdown font color currently white
     text_rect = text.get_rect(center=(x + ICON_WIDTH / 2, y + ICON_HEIGHT / 2))
     screen.blit(text, text_rect.topleft)
 

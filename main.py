@@ -36,7 +36,7 @@ def main():
 def run_overlay_script(subclass_name):
     try:
         os.chdir(subclass_name)
-        subprocess.run(["python", "overlay.py"])
+        subprocess.run(["python", "main.py"])
     except FileNotFoundError:
         print(f"{Color.BLUE}Currently, a profile for your chosen subclass does not exist. However, you can create one by following the instructions in the guide available at:\n\nhttps://github.com/BarutSRB/LA_Overlay/blob/main/GUIDE.md\n\nIf you do create a profile, we encourage you to contribute it to the community.{Color.END}")
 

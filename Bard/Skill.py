@@ -47,7 +47,7 @@ class Skill():
             self.sound_played = True
         
     def add_image(self, ICON_WIDTH, ICON_HEIGHT):
-        self.image = pygame.transform.scale(pygame.image.load("./Bard/Assets/"+self.name+".png"),(ICON_WIDTH, ICON_HEIGHT) )
+        self.image = pygame.transform.scale(pygame.image.load("./Assets/"+self.name+".png"),(ICON_WIDTH, ICON_HEIGHT) )
         self.rect = self.image.get_rect()
         
     def add_sound(self, sound):

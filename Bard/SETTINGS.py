@@ -99,8 +99,8 @@ for key in SKILLS:
     
     
 pygame.mixer.init()
-Sonic_Vibration_Sound = pygame.mixer.Sound('./Bard/Assets/button-124476.mp3')
-Heavenly_Tune_Sound = pygame.mixer.Sound('./Bard/Assets/button-124476.mp3')
+Sonic_Vibration_Sound = pygame.mixer.Sound('./Assets/alert.mp3')
+Heavenly_Tune_Sound = pygame.mixer.Sound('./Assets/alert.mp3')
 
 Sonic_Vibration_Sound.set_volume(ALERT_VOLUME)
 Heavenly_Tune_Sound.set_volume(ALERT_VOLUME)
