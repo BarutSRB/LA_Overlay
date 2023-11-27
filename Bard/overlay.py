@@ -48,7 +48,7 @@ def calculate_position(index):
     return x, y
 
 def handle_skill_flash(skill, key, x, y, current_time):
-    if skill.flash_cd and 0 < skill.current_buff <= 2 and (current_time // 200) % 2: #Flashing speed 200ms per second
+    if skill.flash_cd and skill.current_buff is not None and 0 < skill.current_buff <= 2 and (current_time // 200) % 2: #Flashing speed 200ms per second
         red_icon = pygame.Surface((ICON_WIDTH, ICON_HEIGHT), pygame.SRCALPHA)
         red_icon.fill((255, 0, 0)) #Color of flashing image, currently red
         red_icon.blit(skill.image, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
@@ -61,7 +61,7 @@ def draw_cooldown_and_buff_bars(skill, key, x, y, font):
     if skill.current_cd > 0:
         draw_cooldown_overlay(skill, x, y)
         draw_cooldown_text(skill.current_cd, x, y, font, skill)
-    if  skill.buff is not None and skill.current_buff > 0:
+    if skill.buff is not None and skill.current_buff is not None and skill.current_buff > 0:
         draw_buff_bar(skill, x, y)
 
 def draw_cooldown_overlay(skill, x, y):

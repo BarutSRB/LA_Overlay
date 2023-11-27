@@ -1,13 +1,13 @@
-
 import pygame
 from time import time
 
 class Skill():
-    def __init__(self, name, cooldown, buff):
+    def __init__(self, name, cooldown, buff, cast_time=0):
         self.last_used = -1
         self.name = name
         self.default_cooldown = cooldown
         self.buff = buff
+        self.cast_time = cast_time
         self.sound_played = True
         self.gem_multiplier = 1
         self.swiftness = 0 
@@ -31,10 +31,12 @@ class Skill():
         # these are negative if the skill is ready / buff has ended
     @property
     def current_buff(self):
-        # Remaining buff duration
         if self.buff is None:
             return None
-        return self.buff - (time() - self.last_used)
+        buff_start_time = self.last_used + self.cast_time
+        if time() < buff_start_time:
+            return None  # Buff hasn't started yet
+        return self.buff - (time() - buff_start_time)
     
     def use(self):
         if self.current_cd <= 0:
@@ -42,7 +44,7 @@ class Skill():
             self.sound_played = False
         
     def check_sound(self):
-        if self.sound is not None and self.current_buff <= 1 and not self.sound_played:
+        if self.sound is not None and self.current_buff is not None and self.current_buff <= 1 and not self.sound_played:
             self.sound.play()
             self.sound_played = True
         
