@@ -6,6 +6,14 @@ from time import sleep
 from overlay import update_display
 from SETTINGS import SKILLS
 
+global_cooldown_active = False
+
+# Global cast cooldown
+def global_cooldown():
+    global global_cooldown_active
+    sleep(1)  # This is the global cooldown period
+    global_cooldown_active = False
+
 # Skill management in a single thread
 def manage_skills(skills):
     while True:
@@ -15,9 +23,15 @@ def manage_skills(skills):
                    
 # Function to handle skill activation
 def handle_skill_activation(key, skills):
+    global global_cooldown_active
+    if global_cooldown_active:
+        return
     skill = skills[key]
     if skill.current_cd <= 0:
         skill.use()
+        # Start global cooldown
+        global_cooldown_active = True
+        threading.Thread(target=lambda: global_cooldown(), daemon=True).start()
         
 # Keyboard listener
 def start_keyboard_listener(skills):
