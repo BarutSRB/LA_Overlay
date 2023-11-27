@@ -1,6 +1,6 @@
 from Skill import *
 
-WINDOW_POS_X, WINDOW_POS_Y = 1650, 1000 # Position of the overlay
+WINDOW_POS_X, WINDOW_POS_Y = 1600, 700 # Position of the overlay
 
 WINDOW_SIZE = (800, 600)
 ICON_WIDTH, ICON_HEIGHT = 30, 30
