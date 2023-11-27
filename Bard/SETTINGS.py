@@ -7,7 +7,7 @@ ICON_WIDTH, ICON_HEIGHT = 30, 30
 SKILL_GAP, ROW_HEIGHT = 1, ICON_WIDTH + 5
 
 
-SWIFTNESS = 1800
+SWIFTNESS = 1830
 ALERT_VOLUME = 0.05 # Set to 0 to disable sound
 
 # List of supported skills:
@@ -24,7 +24,7 @@ Guardian_Tune_Agile      =  Skill("Guardian_Tune", 15, 4+4 )
 Sonatina                 =  Skill("Sonatina", 21-7, 5)
 Stigma_Brilliant         =  Skill("Stigma", 16, 4+2+3)
 Stigma_Storm             =  Skill("Stigma", 16, None)
-Harp_of_Rhythm           =  Skill("Harp_of_Rhythm", 24, None) # Not sure how long the harp lasts
+Harp_of_Rhythm           =  Skill("Harp_of_Rhythm", 24, 15)
 Rhythm_Buckshot          =  Skill("Rhythm_Buckshot", 16, None)
 Dissonance_Living        =  Skill("Dissonance", 8+2, 5+2)
 Dissonance_No_Living     =  Skill("Dissonance", 8, 5+2)
@@ -32,19 +32,19 @@ Dissonance_No_Living     =  Skill("Dissonance", 8, 5+2)
 # You can add a new skill like this:
 # Example_New_Skill = Skill("Example_Skill_Name", Cooldown, Buff duration)
 
-# Tripod level 5 is assumed
+# Tripod level 5 for CD is assumed
 
 
 # Edit your Loadout & Keybinds here:
 SKILLS = {
     'q': Sound_Shock,
-    'w': Prelude_of_Storm,
-    'e': Wind_of_Music,
-    'r': Sonic_Vibration,
-    'a': Rhapsody_of_Light,
-    's': Stigma_Brilliant,
-    'd': Heavenly_Tune,
-    'f': Guardian_Tune_Wind,
+    'w': Sonic_Vibration,
+    'e': Prelude_of_Storm,
+    'r': Soundholic,
+    'a': Heavenly_Tune,
+    's': Guardian_Tune_Agile,
+    'd': Rhapsody_of_Light,
+    'f': Wind_of_Music,
 }
 
 
@@ -57,16 +57,19 @@ GEMS = {
     4 : [],
     5 : [],
     6 : [],
-    7 : [Sound_Shock, 
-         Prelude_of_Storm, 
-         Wind_of_Music,
-         Sonic_Vibration,
-         Rhapsody_of_Light,
-         Stigma_Brilliant,
-         Guardian_Tune_Wind,],
+    7 : [],
     8 : [],
     9 : [],
-    10 : [Heavenly_Tune],
+    10 : [
+    Sound_Shock,
+    Sonic_Vibration,
+    Prelude_of_Storm,
+    Soundholic,
+    Heavenly_Tune,
+    Guardian_Tune_Agile,
+    Rhapsody_of_Light,
+    Wind_of_Music,
+    ],
 }
 
 # These skills will flash red when its cooldowns are below 2 seconds

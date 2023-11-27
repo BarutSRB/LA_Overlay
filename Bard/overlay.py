@@ -28,7 +28,7 @@ win32gui.SetLayeredWindowAttributes(hwnd, win32api.RGB(0, 0, 0), 0, win32con.LWA
 
 
 # Function to update display
-def update_display(skills):
+def update_display(skills, gauge):
     screen.fill((0, 0, 0))
     font = pygame.font.SysFont(None, 36) #Change Font or Size of Font
     current_time = pygame.time.get_ticks()
@@ -37,6 +37,8 @@ def update_display(skills):
         x, y = calculate_position(i)
         handle_skill_flash(skill, key, x, y, current_time)
         draw_cooldown_and_buff_bars(skill, key, x, y, font)
+
+    draw_gauge_circles(gauge, 80, 30)  # Set your desired position for gauge circles
 
     pygame.display.flip()
 
@@ -85,6 +87,12 @@ def draw_buff_bar(skill,  x, y):
     buff_bar = pygame.Surface((buff_bar_width, 5))
     buff_bar.fill((0, 255, 0))
     screen.blit(buff_bar, (x, y + ICON_HEIGHT))
+
+def draw_gauge_circles(gauge, x, y):
+    circle_radius = 10
+    circle_gap = 5
+    for i in range(gauge):
+        pygame.draw.circle(screen, (0, 0, 255), (x + i * (circle_radius * 2 + circle_gap), y), circle_radius)
 
 # # Function to block key events
 # def block_key_event(skill_states, key):
