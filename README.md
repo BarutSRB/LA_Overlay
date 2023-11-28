@@ -30,7 +30,7 @@ The hope is that Smile Gate developers will stop being lazy and eventually eithe
 ## Installation
 
 1. Install Python.
-2. In the Command Prompt, type `pip install pygame pywin32 keyboard`.
+2. In the Command Prompt, type `pip install pygame pywin32 keyboard opencv-python`.
 3. Open the `SETTINGS.py` in your sub class directory in a code editor like Sublime Text or Notepad++ and add your gems and swiftness stat. Also, edit the positioning of the overlay based on your resolution( `WINDOW_POS_X` and `WINDOW_POS_Y`, Default settings are for 3440x1440p).
 4. Run the program by typing `py main.py` in the Command Prompt in the main directory.
 
