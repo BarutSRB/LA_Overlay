@@ -13,7 +13,7 @@
 - ``Buff Uptime:`` Tracks and displays skill's buff uptime. Buffs are represented by a green bar below the skill's icon, which decreases over time.
 - ``Audio and Visual Alerts:`` Provides an audio alert and flashes the buff skill icon in red 3 seconds before the expiration of Bard's Heavenly Tune and Sonic Vibration buffs to help prevent overlapping of buffs and ensure efficient rotation.
 - ``Gauge Tracker:`` Shows class gauge bars. You might need to adjust it for your screen size. Right now, it only works for the Bard class at 3440x1440p flawlessly.
-- ``Key Blocking:`` Currently commented out, but can be enabled to prevent the use of Heavenly Tune or Sonic Vibration while the buff is still up. (Not recommended for use in raids but good for practice.)
+- ``Conviction Judgment:`` Detects when the Conviction Judgment buff is active and applies a 15% cooldown reduction to skills used during its duration.
 
 ## Future Plans 
 (*When I have time and if not lazy*)
