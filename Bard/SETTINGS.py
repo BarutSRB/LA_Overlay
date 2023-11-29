@@ -1,109 +1,64 @@
 from Skill import *
 
-WINDOW_POS_X, WINDOW_POS_Y = 1600, 700 # Position of the overlay
-
+# Window position and size settings
+WINDOW_POS_X, WINDOW_POS_Y = 1600, 700  # Position of the overlay
 WINDOW_SIZE = (800, 600)
-ICON_WIDTH, ICON_HEIGHT = 30, 30
+ICON_WIDTH, ICON_HEIGHT = 30, 30 # Skill icon size
 SKILL_GAP, ROW_HEIGHT = 1, ICON_WIDTH + 5
 
+# Volume settings
+ALERT_VOLUME = 0.95  # Set to 0 to disable sound
 
-SWIFTNESS = 1830
-ALERT_VOLUME = 0.05 # Set to 0 to disable sound
-
-# List of supported skills:
-
-Sound_Shock              =  Skill("Sound_Shock", 6, 4, 0 )
-Prelude_of_Storm         =  Skill("Prelude_of_Storm", 16-3, None, 0 )
-Wind_of_Music            =  Skill("Wind_of_Music", 18-4, 4, 0 )
-Sonic_Vibration          =  Skill("Sonic_Vibration", 24, 6, 0.9 )
-Rhapsody_of_Light        =  Skill("Rhapsody_of_Light", 24-5, None, 0 )
-Soundholic               =  Skill("Soundholic", 24, None, 0 )
-Heavenly_Tune            =  Skill("Heavenly_Tune", 30-6, 8, 0.5 )
-Guardian_Tune_Wind       =  Skill("Guardian_Tune", 30, 8+8, 0 )
-Guardian_Tune_Agile      =  Skill("Guardian_Tune", 15, 4+4, 0 )
-Sonatina                 =  Skill("Sonatina", 21-7, 5, 0)
-Stigma_Brilliant         =  Skill("Stigma", 16, 4+2+3, 0)
-Stigma_Storm             =  Skill("Stigma", 16, None, 0)
-Harp_of_Rhythm           =  Skill("Harp_of_Rhythm", 24, 15, 0)
-Rhythm_Buckshot          =  Skill("Rhythm_Buckshot", 16, None, 0)
-Dissonance_Living        =  Skill("Dissonance", 8+2, 5+2, 0)
-Dissonance_No_Living     =  Skill("Dissonance", 8, 5+2, 0)
-
-# You can add a new skill like this:
-# Example_New_Skill = Skill("Example_Skill_Name", Cooldown, Buff duration, Cast Time)
-
-# Tripod level 5 for CD is assumed
+# List of supported skills (Cooldown, Buff duration, Cast Time, Judgement Cooldown)
+Sound_Shock         = Skill("Sound_Shock",         3,   4,    0,    judgement_cooldown=4)
+Prelude_of_Storm    = Skill("Prelude_of_Storm",    7,   None, 0,    4)
+Wind_of_Music       = Skill("Wind_of_Music",       7,   4,    0,    6)
+Sonic_Vibration     = Skill("Sonic_Vibration",    12,   6,    0.9,  4)
+Rhapsody_of_Light   = Skill("Rhapsody_of_Light",  10,   None, 0,    8)
+Soundholic          = Skill("Soundholic",         12,   None, 0,    4)
+Heavenly_Tune       = Skill("Heavenly_Tune",      90,   8,    0.5, judgement_cooldown=34)
+Guardian_Tune       = Skill("Guardian_Tune",       8,  16,    0,    4)
+Sonatina            = Skill("Sonatina",           21,   5,    0,    4)
+Stigma              = Skill("Stigma",             16,   9,    0,    4)
+Harp_of_Rhythm      = Skill("Harp_of_Rhythm",     24,  15,    0,    4)
+Rhythm_Buckshot     = Skill("Rhythm_Buckshot",    16,   None, 0,    4)
+Dissonance          = Skill("Dissonance",         10,   7,    0,    4)
 
 
-# Edit your Loadout & Keybinds here:
+# Skill keybinds
 SKILLS = {
-    'q': Sound_Shock,
-    'w': Sonic_Vibration,
-    'e': Prelude_of_Storm,
-    'r': Soundholic,
-    'a': Heavenly_Tune,
-    's': Guardian_Tune_Agile,
-    'd': Rhapsody_of_Light,
-    'f': Wind_of_Music,
+    "q": Sound_Shock,
+    "w": Sonic_Vibration,
+    "e": Prelude_of_Storm,
+    "r": Soundholic,
+    "a": Heavenly_Tune,
+    "s": Guardian_Tune,
+    "d": Rhapsody_of_Light,
+    "f": Wind_of_Music,
 }
 
-
-# Edit your gem levels here:
-GEMS = {
-    0 : [],
-    1 : [],
-    2 : [],
-    3 : [],
-    4 : [],
-    5 : [],
-    6 : [],
-    7 : [],
-    8 : [],
-    9 : [],
-    10 : [
-    Sound_Shock,
-    Sonic_Vibration,
-    Prelude_of_Storm,
-    Soundholic,
-    Heavenly_Tune,
-    Guardian_Tune_Agile,
-    Rhapsody_of_Light,
-    Wind_of_Music,
-    ],
-}
-
-# These skills will flash red when its cooldowns are below 2 seconds
-FLASH_COOLDOWN = [Sonic_Vibration, Heavenly_Tune] 
-
-
-
+# Skills that will flash red when their cooldowns are below 2 seconds
+FLASH_COOLDOWN = [Sonic_Vibration, Heavenly_Tune]
 
 # -------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------- DO NOT EDIT BELOW --------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------
-# -------------------------------------------------------------------------------------------------------------------
 
+# Initialize the skills
+for skill in FLASH_COOLDOWN:
+    skill.flash_cd = True
 
+for key, skill in SKILLS.items():
+    skill.assign_key(key)
 
-
-for i in FLASH_COOLDOWN:
-    i.flash_cd = True
-    
-for key in SKILLS:
-    SKILLS[key].assign_key(key)
-    SKILLS[key].swiftness = SWIFTNESS
-    
-for level in GEMS:
-    for skill in GEMS[level]:
-        skill.set_gem(1 - level*0.02)
-
-
-for key in SKILLS:
-    SKILLS[key].add_image(ICON_WIDTH, ICON_HEIGHT)
-    
-    
+# Adding images to skills
 pygame.mixer.init()
-Sonic_Vibration_Sound = pygame.mixer.Sound('./Assets/alert.mp3')
-Heavenly_Tune_Sound = pygame.mixer.Sound('./Assets/alert.mp3')
+for key, skill in SKILLS.items():
+    skill.add_image(ICON_WIDTH, ICON_HEIGHT)
+
+# Sound settings for specific skills
+Sonic_Vibration_Sound = pygame.mixer.Sound("./Assets/Sounds/alert.mp3")
+Heavenly_Tune_Sound = pygame.mixer.Sound("./Assets/Sounds/alert.mp3")
 
 Sonic_Vibration_Sound.set_volume(ALERT_VOLUME)
 Heavenly_Tune_Sound.set_volume(ALERT_VOLUME)
