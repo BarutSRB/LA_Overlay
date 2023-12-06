@@ -21,7 +21,7 @@ pygame.init()
 screen = pygame.display.set_mode(WINDOW_SIZE, pygame.NOFRAME)
 pygame.display.set_caption("Skill Cooldown Tracker")
 
-# Make window transparent and always on topra
+# Make window transparent and always on top
 hwnd = win32gui.GetForegroundWindow()
 win32gui.SetWindowPos(
     hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE
@@ -38,14 +38,13 @@ win32gui.SetLayeredWindowAttributes(
 )
 
 
-# Function to update display
 def update_display(skills, gauge, judgement_buff_active, judgement_start_time, judgement_buff_duration):
     screen.fill((0, 0, 0))
-    font = pygame.font.SysFont(None, 36)  # Change Font or Size of Font
+    font = pygame.font.SysFont(None, 36)
     current_time = pygame.time.get_ticks()
 
     for i, (key, skill) in enumerate(skills.items()):
-        x, y = calculate_position(i)
+        x, y = calculate_position(skill, skills)
         handle_skill_flash(skill, key, x, y, current_time)
         draw_cooldown_and_buff_bars(skill, key, x, y, font)
 
@@ -63,10 +62,22 @@ def update_display(skills, gauge, judgement_buff_active, judgement_start_time, j
     pygame.display.flip()
 
 
-def calculate_position(index):
-    x = 50 + (index % 4) * (ICON_WIDTH + SKILL_GAP)
-    y = 50 + (index // 4) * ROW_HEIGHT
-    return x, y
+def calculate_position(skill, skills):
+    global_x_adjustment = 30
+
+    if skill.name == "Symphonia":
+        x_adjustment = -40
+        y_adjustment = -35
+
+        bottom_row_y = 50 + (1 * ROW_HEIGHT)
+        x = 30 + x_adjustment + global_x_adjustment
+        y = bottom_row_y + y_adjustment
+        return x, y
+    else:
+        index = list(skills.keys()).index(skill.keybind)
+        x = 50 + (index % 4) * (ICON_WIDTH + SKILL_GAP) + global_x_adjustment
+        y = 50 + (index // 4) * ROW_HEIGHT
+        return x, y
 
 
 def handle_skill_flash(skill, key, x, y, current_time):
@@ -74,9 +85,16 @@ def handle_skill_flash(skill, key, x, y, current_time):
         skill.flash_cd
         and skill.current_buff is not None
         and 0 < skill.current_buff <= 2
-        and (current_time // 200) % 2 # Flashing speed 200ms per second
+        and (current_time // 200) % 2  # Flashing speed 200ms per second
     ):
-        red_icon = pygame.Surface((ICON_WIDTH, ICON_HEIGHT), pygame.SRCALPHA)
+        # Determine the size of the flashing icon
+        flash_icon_width = ICON_WIDTH
+        flash_icon_height = ICON_HEIGHT
+        if skill.name == "Symphonia":
+            flash_icon_width *= 2
+            flash_icon_height *= 2
+
+        red_icon = pygame.Surface((flash_icon_width, flash_icon_height), pygame.SRCALPHA)
         red_icon.fill((255, 0, 0))  # Color of flashing image, currently red
         red_icon.blit(skill.image, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
         screen.blit(red_icon, (x, y))
@@ -97,7 +115,14 @@ def draw_cooldown_and_buff_bars(skill, key, x, y, font):
 
 
 def draw_cooldown_overlay(skill, x, y):
-    overlay = pygame.Surface((ICON_WIDTH, ICON_HEIGHT))
+    # Determine the size of the cooldown overlay
+    overlay_width = ICON_WIDTH
+    overlay_height = ICON_HEIGHT
+    if skill.name == "Symphonia":
+        overlay_width *= 2
+        overlay_height *= 2
+
+    overlay = pygame.Surface((overlay_width, overlay_height))
     overlay.set_alpha(128)
     overlay.fill((128, 128, 128))
     screen.blit(overlay, (x, y))
@@ -111,18 +136,40 @@ def draw_cooldown_text(cooldown, x, y, font, skill):
         # Display without decimals if cooldown is 1 or more seconds
         rounded = int(cooldown)
 
-    text = font.render(
-        str(rounded), True, (255, 255, 255) # Countdown font color currently white
-    )
-    text_rect = text.get_rect(center=(x + ICON_WIDTH / 2, y + ICON_HEIGHT / 2))
-    screen.blit(text, text_rect.topleft)
+    text = font.render(str(rounded), True, (255, 255, 255))
+    text_rect = text.get_rect()
+
+    # Adjust text position for Symphonia
+    if skill.name == "Symphonia":
+        text_x = x + (ICON_WIDTH * 2 - text_rect.width) / 2
+        text_y = y + (ICON_HEIGHT * 2 - text_rect.height) / 2
+    else:
+        text_x = x + (ICON_WIDTH - text_rect.width) / 2
+        text_y = y + (ICON_HEIGHT - text_rect.height) / 2
+
+    screen.blit(text, (text_x, text_y))
 
 
 def draw_buff_bar(skill, x, y):
-    buff_bar_width = int((skill.current_buff / skill.buff) * ICON_WIDTH)
+    bar_width = ICON_WIDTH
+    if skill.name == "Symphonia":
+        bar_width *= 2
+
+    # Calculate the current width of the buff bar based on the buff duration
+    buff_bar_width = int((skill.current_buff / skill.buff) * bar_width)
+
+    # Ensure that the buff bar does not exceed the width of the icon
+    buff_bar_width = min(buff_bar_width, bar_width)
+
     buff_bar = pygame.Surface((buff_bar_width, 5))
-    buff_bar.fill((0, 255, 0))
-    screen.blit(buff_bar, (x, y + ICON_HEIGHT))
+    buff_bar.fill((0, 255, 0))  # Green progress bar
+
+    # Position the bar below the icon
+    bar_y = y + ICON_HEIGHT
+    if skill.name == "Symphonia":
+        bar_y += ICON_HEIGHT
+
+    screen.blit(buff_bar, (x, bar_y))
 
 
 def draw_gauge_circles(gauge, x, y):
@@ -144,7 +191,7 @@ def draw_rune_and_progress(screen, judgement_start_time, judgement_buff_duration
     elapsed_time = current_time - judgement_start_time
     remaining_time = max(judgement_buff_duration - elapsed_time, 0)
 
-    # Load rune image
+    # Load judgment image
     rune_image = pygame.transform.scale(pygame.image.load("./Assets/Buffs/ConJud.png"), (ICON_WIDTH, ICON_HEIGHT))
     rune_x, rune_y = 80, 20  # Set position for judgment buff image
     screen.blit(rune_image, (rune_x, rune_y))

@@ -45,6 +45,9 @@ class Skill:
             self.sound_played = True
 
     def add_image(self, icon_width, icon_height):
+        if self.name == "Symphonia":
+            icon_height *= 2
+            icon_width *= 2
         self.image = pygame.transform.scale(pygame.image.load("./Assets/Skills/"+self.name+".png"), (icon_width, icon_height))
         self.rect = self.image.get_rect()
 

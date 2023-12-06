@@ -112,7 +112,7 @@ def check_bars(positions):
     if not judgement_buff_active and positions.get("Judgement"):
         if check_bar(positions["Judgement"], 300, image="./Assets/OCR/judgement.png"):
             judgement_buff_active = True
-            judgement_start_time = pygame.time.get_ticks() / 1000  # Set the start time
+            judgement_start_time = pygame.time.get_ticks() / 1000
             threading.Thread(target=handle_judgement_buff, daemon=True).start()
 
     return gauge
