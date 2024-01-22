@@ -4,6 +4,13 @@
   <img src="https://i.imgur.com/J1KqXGR.gif" alt="Your Image Description">
 </p>
 
+
+## NEW
+**Thank's to Akizo96 who has added Artist support <3**
+<p align="center">
+  <img src="https://i.imgur.com/iB3ZxWq.png" alt="Your Image Description">
+</p>
+
 ## Description
 **LA_Overlay** is a standalone overlay designed specifically for *Lost Ark*. It operates independently of the game, ensuring no interaction with the game's memory or packet analysis, making it completely safe.
 
